@@ -65,9 +65,17 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show($title)
     {
-        //
+        $query = Movie::query()
+            ->where('title', 'LIKE', "%{$title}%")
+            ->select('movies.title', 'movies.description', 'movies.file_name', 'movies.original_link')
+            ->get();
+
+
+
+
+        return $query;
     }
 
     /**
