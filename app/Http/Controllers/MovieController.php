@@ -38,12 +38,11 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $client = new Client();
-        $url = 'https://api.themoviedb.org/3/movie/495764?api_key=1a7d45b81aef17ad8e5bc930c17b6a2b&append_to_response=images';
-        $baseImageUrl = 'https://image.tmdb.org/t/p/original';
-        $api_key = '?api_key=1a7d45b81aef17ad8e5bc930c17b6a2b';
+        $url = config('services.moviedb.url'); 
+        $baseImageUrl = config('services.moviedb.base_image_url');
+        $api_key = config('services.moviedb.api_key');
 
         $response = $client->request('GET', $url);
-        $statusCode = $response->getStatusCode();
         $body = $response->getBody()->getContents();
         $json = json_decode($body);
 
@@ -67,15 +66,12 @@ class MovieController extends Controller
      */
     public function show($title)
     {
-        $query = Movie::query()
+        $movies = Movie::query()
             ->where('title', 'LIKE', "%{$title}%")
             ->select('movies.title', 'movies.description', 'movies.file_name', 'movies.original_link')
             ->get();
 
-
-
-
-        return $query;
+        return response()->json(['data' => $movies]);
     }
 
     /**

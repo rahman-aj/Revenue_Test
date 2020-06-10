@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'moviedb' => [
+        'base_image_url' => env('BASE_IMAGE_URL', 'https://image.tmdb.org/t/p/original'),
+        'api_key' => env('API_KEY', '?api_key=1a7d45b81aef17ad8e5bc930c17b6a2b'),
+        'url' => env('URL', 'https://api.themoviedb.org/3/movie/495764?api_key=1a7d45b81aef17ad8e5bc930c17b6a2b&append_to_response=images')
+    ]
 ];

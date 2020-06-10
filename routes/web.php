@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('moviedb-api', 'MovieController@store');
-Route::get('search/{title}', 'MovieController@show');
+Route::get('moviedb-api', 'MovieController@store')->name('moviedb-api');
+Route::get('search/{title}', 'MovieController@show')->name('search');
 
